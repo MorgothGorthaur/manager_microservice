@@ -1,4 +1,4 @@
-package executor.service.manager
+package executor.service
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
