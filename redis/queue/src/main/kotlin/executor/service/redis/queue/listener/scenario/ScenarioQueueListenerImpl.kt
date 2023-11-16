@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class ScenarioQueueListenerImpl(private val template: RedisTemplate<String, Any>) : ScenarioQueueListener {
-    private val key = "scenario.queue.key"
+    private val key = "report.queue.key"
     override fun poll() = template.opsForList().rightPop(key) as? Scenario
 }
