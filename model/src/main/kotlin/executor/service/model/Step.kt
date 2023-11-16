@@ -1,4 +1,4 @@
-package executor.service
+package executor.service.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Reference
