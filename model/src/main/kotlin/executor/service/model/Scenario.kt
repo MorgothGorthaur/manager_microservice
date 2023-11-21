@@ -2,19 +2,14 @@ package executor.service.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
-import org.springframework.data.redis.core.TimeToLive
 import org.springframework.data.redis.core.index.Indexed
 
 @RedisHash("scenarios")
 data class Scenario(
     @Indexed val name: String,
     @Indexed val site: String,
-    val steps: List<Step>,
-    val report: ScenarioReport
+    val steps: List<Step>?,
 ) {
     @get:Id
     var id: String? = null
-
-    @TimeToLive
-    val expiration: Long = 604800
 }
