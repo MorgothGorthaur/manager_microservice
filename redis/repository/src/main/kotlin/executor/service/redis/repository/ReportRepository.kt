@@ -1,6 +1,6 @@
 package executor.service.redis.repository
 
+import com.redis.om.spring.repository.RedisDocumentRepository
 import executor.service.model.ScenarioReport
-import org.springframework.data.repository.CrudRepository
 
-interface ReportRepository : CrudRepository<ScenarioReport, String>
+interface ReportRepository : RedisDocumentRepository<ScenarioReport, String>
