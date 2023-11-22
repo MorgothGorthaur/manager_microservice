@@ -1,13 +1,12 @@
 package executor.service.model
 
+import com.redis.om.spring.annotations.Document
+import com.redis.om.spring.annotations.Searchable
 import org.springframework.data.annotation.Id
-import org.springframework.data.redis.core.RedisHash
-import org.springframework.data.redis.core.index.Indexed
-
-@RedisHash("scenarios")
+@Document
 data class Scenario(
-    @Indexed val name: String,
-    @Indexed val site: String,
+    @Searchable val name: String,
+    @Searchable val site: String,
     val steps: List<Step>?,
 ) {
     @get:Id
