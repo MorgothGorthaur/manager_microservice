@@ -22,7 +22,7 @@ allprojects {
     apply(plugin = "io.spring.dependency-management")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-data-redis")
+        implementation("com.redis.om:redis-om-spring:0.8.7")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
