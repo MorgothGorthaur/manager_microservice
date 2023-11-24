@@ -19,11 +19,11 @@ class ScenarioController(private val service: ScenarioProcessingService) {
     @GetMapping
     fun findAll(@RequestBody pageConfig: PageConfig) = service.findAll(pageConfig)
 
-    @GetMapping("/{name}")
+    @GetMapping("/name={name}")
     fun findByName(@RequestBody pageConfig: PageConfig, @PathVariable name: String) =
         service.findByName(name, pageConfig)
 
-    @GetMapping("/{site}")
+    @GetMapping("/site={site}")
     fun findBySite(@RequestBody pageConfig: PageConfig, @PathVariable site: String) =
         service.findBySite(site, pageConfig)
 
