@@ -12,7 +12,7 @@ class TemplateConfig(private val jedisConnectionFactory: JedisConnectionFactory)
     @Bean
     fun redisTemplate() = StringRedisTemplate().apply { connectionFactory = jedisConnectionFactory }
 
-    @Bean
+    @Bean("queue_mapper")
     fun mapper() = ObjectMapper().apply { registerModule(JavaTimeModule()) }
 
 }
