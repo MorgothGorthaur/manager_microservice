@@ -8,3 +8,4 @@ findProject(":redis:queue")?.name = "queue"
 include("redis:repository")
 findProject(":redis:repository")?.name = "repository"
 include("processing")
+include("controller")
