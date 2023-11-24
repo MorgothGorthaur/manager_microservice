@@ -1,14 +1,14 @@
 package executor.service.processing.report
 
 import executor.service.model.ScenarioReport
+import executor.service.processing.model.PageConfig
 import org.springframework.data.domain.Page
 
 interface ReportProcessingService {
-    fun findLastByScenarioId(size: Int, scenarioId: String): List<ScenarioReport>
 
-    fun findByScenarioId(pageNum: Int, pageSize: Int, scenarioId: String): Page<ScenarioReport>
+    fun findByScenarioId(scenarioId: String, pageConfig: PageConfig): Page<ScenarioReport>
 
-    fun findSuccessful(pageNum: Int, pageSize: Int, scenarioId: String): Page<ScenarioReport>
+    fun findSuccessful(scenarioId: String, pageConfig: PageConfig): Page<ScenarioReport>
 
-    fun findFailed(pageNum: Int, pageSize: Int, scenarioId: String): Page<ScenarioReport>
+    fun findFailed(scenarioId: String, pageConfig: PageConfig): Page<ScenarioReport>
 }
