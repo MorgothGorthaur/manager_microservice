@@ -1,4 +1,4 @@
-package executor.service.redis.queue.listener.repot
+package executor.service.dao.queue.listener.repot
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue

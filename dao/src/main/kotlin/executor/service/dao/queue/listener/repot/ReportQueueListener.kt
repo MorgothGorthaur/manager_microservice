@@ -1,7 +1,7 @@
-package executor.service.redis.queue.listener.repot
+package executor.service.dao.queue.listener.repot
 
 import executor.service.model.ScenarioReport
-import executor.service.redis.queue.listener.QueueListener
+import executor.service.dao.queue.listener.QueueListener
 
 interface ReportQueueListener : QueueListener<ScenarioReport> {
 }

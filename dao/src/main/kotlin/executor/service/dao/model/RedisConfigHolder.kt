@@ -1,4 +1,4 @@
-package executor.service.redis.configuration.model
+package executor.service.dao.model
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.PropertySource
