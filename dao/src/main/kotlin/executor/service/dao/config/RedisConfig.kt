@@ -1,6 +1,5 @@
 package executor.service.dao.config
 
-import com.redis.om.spring.annotations.EnableRedisDocumentRepositories
 import executor.service.dao.model.RedisConfigHolder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,7 +9,6 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.StringRedisTemplate
 
 @Configuration
-@EnableRedisDocumentRepositories
 class RedisConfig(private val holder: RedisConfigHolder) {
     @Bean
     fun jedisConnectionFactory(): JedisConnectionFactory {
