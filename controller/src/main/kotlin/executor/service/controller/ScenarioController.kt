@@ -3,6 +3,8 @@ package executor.service.controller
 import executor.service.processing.model.PageConfig
 import executor.service.model.Scenario
 import executor.service.processing.scenario.ScenarioProcessingService
+import jakarta.validation.Valid
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -28,11 +30,15 @@ class ScenarioController(private val service: ScenarioProcessingService) {
         service.findBySite(site, pageConfig)
 
     @PostMapping
-    fun add(@RequestBody scenario: Scenario) {service.add(scenario)}
+    fun add(@Valid @RequestBody scenario: Scenario) { service.add(scenario) }
 
     @PatchMapping
-    fun update(@RequestBody scenario: Scenario) {service.update(scenario)}
+    fun update(@Valid @RequestBody scenario: Scenario) {
+        service.update(scenario)
+    }
 
     @DeleteMapping
-    fun delete(@RequestBody scenario: Scenario) {service.delete(scenario)}
+    fun delete(@RequestBody scenario: Scenario) {
+        service.delete(scenario)
+    }
 }
