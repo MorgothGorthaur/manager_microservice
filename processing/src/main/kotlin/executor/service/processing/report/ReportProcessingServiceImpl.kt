@@ -1,7 +1,7 @@
 package executor.service.processing.report
 
 import executor.service.processing.model.PageConfig
-import executor.service.redis.repository.ReportRepository
+import executor.service.dao.repository.ReportRepository
 import org.springframework.stereotype.Service
 
 @Service

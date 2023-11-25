@@ -1,4 +1,4 @@
-package executor.service.redis.repository
+package executor.service.dao.repository
 
 import com.redis.om.spring.repository.RedisDocumentRepository
 import executor.service.model.Scenario
