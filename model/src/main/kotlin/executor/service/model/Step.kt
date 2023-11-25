@@ -1,6 +1,8 @@
 package executor.service.model
 
+import jakarta.validation.constraints.NotEmpty
+
 data class Step(
-    val action: String,
-    val value: String
+    @field:NotEmpty val action: String,
+    @field:NotEmpty val value: String
 )
