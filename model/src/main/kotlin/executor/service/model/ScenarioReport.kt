@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 data class ScenarioReport(
     val name: String,
     val site: String,
-    val stepsReports: List<StepReport>,
+    val stepReports: List<StepReport>,
     @Indexed val scenarioId: String,
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
