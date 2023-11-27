@@ -43,4 +43,8 @@ allprojects {
     tasks.bootBuildImage {
         builder.set("paketobuildpacks/builder-jammy-base:latest")
     }
+
+    tasks.bootJar {
+        enabled = false
+    }
 }
