@@ -13,7 +13,5 @@ class QueueProcessingFacadeImpl(
 ) : QueueProcessingFacade {
 
     @Scheduled(fixedDelay = 120000)
-    override fun execute() { repo.saveAll(getReports()) }
-
-    private fun getReports() = generateSequence { listener.poll() }.toList()
+    override fun execute() { generateSequence { listener.poll() }.forEach { repo.save(it) } }
 }
