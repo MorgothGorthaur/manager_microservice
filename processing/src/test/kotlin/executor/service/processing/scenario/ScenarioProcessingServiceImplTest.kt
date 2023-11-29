@@ -29,28 +29,28 @@ internal class ScenarioProcessingServiceImplTest {
 
 
     @Test
-    fun add() {
+    fun testAdd() {
         val scenario = getScenario()
         service.add(scenario)
         verify(repo).save(scenario)
     }
 
     @Test
-    fun update() {
+    fun testUpdate() {
         val scenario = getScenario().apply { id = "someId" }
         service.update(scenario)
         verify(repo).update(scenario)
     }
 
     @Test
-    fun delete() {
+    fun testDelete() {
         val scenario = getScenario().apply { id = "someId" }
         service.delete(scenario)
         verify(repo).delete(scenario)
     }
 
     @Test
-    fun findAll() {
+    fun tetFindAll() {
         val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findAll(any<Pageable>())).thenReturn(expected)
@@ -60,7 +60,7 @@ internal class ScenarioProcessingServiceImplTest {
     }
 
     @Test
-    fun findByName() {
+    fun testFindByName() {
         val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findPageByNameContaining(anyString(), any())).thenReturn(expected)
@@ -70,7 +70,7 @@ internal class ScenarioProcessingServiceImplTest {
     }
 
     @Test
-    fun findBySite() {
+    fun testFindBySite() {
         val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findPageBySiteContaining(anyString(), any())).thenReturn(expected)
