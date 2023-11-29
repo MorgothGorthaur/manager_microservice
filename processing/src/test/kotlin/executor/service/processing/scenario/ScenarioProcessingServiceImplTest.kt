@@ -2,7 +2,6 @@ package executor.service.processing.scenario
 
 import executor.service.dao.repository.ScenarioRepository
 import executor.service.model.Scenario
-import executor.service.model.Step
 import executor.service.processing.model.PageConfig
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.BeforeEach
@@ -80,10 +79,8 @@ internal class ScenarioProcessingServiceImplTest {
     }
 
     private fun getScenario() = Scenario(
-        "some scenario", "some site", listOf(
-            Step("some action", "some value"),
-            Step("some action", "some value"),
-            Step("some action", "some value")
-        )
+        name = "some scenario",
+        site = "some site",
+        steps = listOf()
     )
 }
