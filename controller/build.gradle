@@ -2,3 +2,7 @@ dependencies {
     implementation(project(":model"))
     implementation(project(":processing"))
 }
+
+tasks.bootJar {
+    enabled = true
+}
