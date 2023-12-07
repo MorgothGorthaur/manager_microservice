@@ -1,8 +1,8 @@
 package executor.service.processing.scenario
 
 import executor.service.model.Scenario
-import executor.service.processing.model.PageConfig
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 
 interface ScenarioProcessingService {
     fun add(scenario: Scenario)
@@ -11,10 +11,10 @@ interface ScenarioProcessingService {
 
     fun delete(scenario: Scenario)
 
-    fun findAll(pageConfig: PageConfig): Page<Scenario>
+    fun findAll(request: PageRequest): Page<Scenario>
 
-    fun findByName(name: String, pageConfig: PageConfig): Page<Scenario>
+    fun findByName(name: String, request: PageRequest): Page<Scenario>
 
-    fun findBySite(site: String, pageConfig: PageConfig): Page<Scenario>
+    fun findBySite(site: String, request: PageRequest): Page<Scenario>
 
 }
