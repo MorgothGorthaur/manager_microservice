@@ -1,9 +1,9 @@
 package executor.service.controller
 
 import executor.service.model.Scenario
-import executor.service.processing.model.PageConfig
 import executor.service.processing.scenario.ScenarioProcessingService
 import jakarta.validation.Valid
+import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*
 class ScenarioController(private val service: ScenarioProcessingService) {
 
     @GetMapping
-    fun findAll(@RequestBody pageConfig: PageConfig) = service.findAll(pageConfig)
+    fun findAll(@RequestParam pageNum: Int, @RequestParam pageSize: Int) = service.findAll(PageRequest.of(pageNum, pageSize))
 
     @GetMapping("/name={name}")
-    fun findByName(@RequestBody pageConfig: PageConfig, @PathVariable name: String) =
-        service.findByName(name, pageConfig)
+    fun findByName(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable name: String) =
+        service.findByName(name, PageRequest.of(pageNum, pageSize))
 
     @GetMapping("/site={site}")
-    fun findBySite(@RequestBody pageConfig: PageConfig, @PathVariable site: String) =
-        service.findBySite(site, pageConfig)
+    fun findBySite(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable site: String) =
+        service.findBySite(site, PageRequest.of(pageNum, pageSize))
 
     @PostMapping
     fun add(@Valid @RequestBody scenario: Scenario) { service.add(scenario) }
