@@ -1,21 +1,14 @@
 package executor.service.controller
 
-import executor.service.processing.model.PageConfig
 import executor.service.model.Scenario
+import executor.service.processing.model.PageConfig
 import executor.service.processing.scenario.ScenarioProcessingService
 import jakarta.validation.Valid
-import org.springframework.web.bind.MethodArgumentNotValidException
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/manager/scenarios")
+@CrossOrigin("*")
 class ScenarioController(private val service: ScenarioProcessingService) {
 
     @GetMapping

@@ -2,14 +2,11 @@ package executor.service.controller
 
 import executor.service.processing.model.PageConfig
 import executor.service.processing.report.ReportProcessingService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/manager/reports")
+@CrossOrigin("*")
 class ReportController(private val service: ReportProcessingService) {
 
     @GetMapping("/{id}")
