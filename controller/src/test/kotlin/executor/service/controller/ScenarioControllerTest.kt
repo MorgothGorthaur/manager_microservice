@@ -3,10 +3,11 @@ package executor.service.controller
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import executor.service.model.Scenario
-import executor.service.processing.model.PageConfig
 import executor.service.processing.scenario.ScenarioProcessingService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -32,11 +33,12 @@ internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @Test
     fun testFindAll() {
-        val pageConfig = PageConfig(10, 10)
-        whenever(service.findAll(pageConfig)).thenReturn(PageImpl(listOf()))
+        val pageNum = 10
+        val pageSize = 10
+        whenever(service.findAll(any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get(BASE_URL).apply {
-            contentType(MediaType.APPLICATION_JSON)
-            content(mapper.writeValueAsString(pageConfig))
+            param("pageNum", pageNum.toString())
+            param("pageSize", pageSize.toString())
         }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
@@ -44,11 +46,12 @@ internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
     @Test
     fun testFindByName() {
         val name = "some name"
-        val pageConfig = PageConfig(10, 10)
-        whenever(service.findByName(name, pageConfig)).thenReturn(PageImpl(listOf()))
+        val pageNum = 10
+        val pageSize = 10
+        whenever(service.findByName(eq(name), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get("$BASE_URL/name=$name").apply {
-            contentType(MediaType.APPLICATION_JSON)
-            content(mapper.writeValueAsString(pageConfig))
+            param("pageNum", pageNum.toString())
+            param("pageSize", pageSize.toString())
         }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
@@ -56,11 +59,12 @@ internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
     @Test
     fun testFindBySite() {
         val site = "some site"
-        val pageConfig = PageConfig(10, 10)
-        whenever(service.findBySite(site, pageConfig)).thenReturn(PageImpl(listOf()))
+        val pageNum = 10
+        val pageSize = 10
+        whenever(service.findBySite(eq(site), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get("$BASE_URL/site=$site").apply {
-            contentType(MediaType.APPLICATION_JSON)
-            content(mapper.writeValueAsString(pageConfig))
+            param("pageNum", pageNum.toString())
+            param("pageSize", pageSize.toString())
         }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
