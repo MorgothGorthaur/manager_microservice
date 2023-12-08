@@ -2,7 +2,6 @@ package executor.service.processing.report
 
 import executor.service.dao.repository.ReportRepository
 import executor.service.model.ScenarioReport
-import executor.service.processing.model.PageConfig
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -12,6 +11,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 import java.time.LocalDateTime
 
 private const val SCENARIO_ID = "some id"
@@ -20,20 +20,20 @@ internal class ReportProcessingServiceImplTest {
 
     private lateinit var repo: ReportRepository
     private lateinit var service: ReportProcessingService
-
+    private lateinit var request: PageRequest
 
     @BeforeEach
     fun init() {
         repo = mock()
         service = ReportProcessingServiceImpl(repo)
+        request = mock()
     }
 
     @Test
     fun testFindByScenarioId() {
         val expected = listOf(getReport("some error"))
-        val pageConfig = PageConfig(10, 10)
         whenever(repo.findPageByScenarioId(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findByScenarioId(SCENARIO_ID, pageConfig).content
+        val result = service.findByScenarioId(SCENARIO_ID, request).content
         assertEquals(expected, result)
         verify(repo).findPageByScenarioId(anyString(), any())
     }
@@ -41,9 +41,8 @@ internal class ReportProcessingServiceImplTest {
     @Test
     fun testFindSuccessful() {
         val expected = listOf(getReport())
-        val pageConfig = PageConfig(10, 10)
         whenever(repo.findPageByScenarioIdAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findSuccessful(SCENARIO_ID, pageConfig).content
+        val result = service.findSuccessful(SCENARIO_ID, request).content
         assertEquals(expected, result)
         verify(repo).findPageByScenarioIdAndErrorMessageIsNull(anyString(), any())
     }
@@ -51,9 +50,8 @@ internal class ReportProcessingServiceImplTest {
     @Test
     fun testFindFailed() {
         val expected = listOf(getReport("some error"))
-        val pageConfig = PageConfig(10, 10)
         whenever(repo.findPageByScenarioIdAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findFailed(SCENARIO_ID, pageConfig).content
+        val result = service.findFailed(SCENARIO_ID, request).content
         assertEquals(expected, result)
         verify(repo).findPageByScenarioIdAndErrorMessageIsNotNull(anyString(), any())
     }

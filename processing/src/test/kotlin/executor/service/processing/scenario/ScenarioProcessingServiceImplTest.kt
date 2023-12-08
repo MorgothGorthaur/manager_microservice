@@ -2,7 +2,6 @@ package executor.service.processing.scenario
 
 import executor.service.dao.repository.ScenarioRepository
 import executor.service.model.Scenario
-import executor.service.processing.model.PageConfig
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -12,6 +11,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
 
@@ -19,11 +19,13 @@ internal class ScenarioProcessingServiceImplTest {
 
     private lateinit var repo: ScenarioRepository
     private lateinit var service: ScenarioProcessingService
+    private lateinit var request: PageRequest
 
     @BeforeEach
     fun init() {
         repo = mock()
         service = ScenarioProcessingServiceImpl(repo)
+        request = mock()
     }
 
 
@@ -50,30 +52,27 @@ internal class ScenarioProcessingServiceImplTest {
 
     @Test
     fun tetFindAll() {
-        val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findAll(any<Pageable>())).thenReturn(expected)
-        val result = service.findAll(pageConfig)
+        val result = service.findAll(request)
         assertSame(expected, result)
         verify(repo).findAll(any<Pageable>())
     }
 
     @Test
     fun testFindByName() {
-        val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findPageByNameContaining(anyString(), any())).thenReturn(expected)
-        val result = service.findByName("some name", pageConfig)
+        val result = service.findByName("some name", request)
         assertSame(expected, result)
         verify(repo).findPageByNameContaining(anyString(), any())
     }
 
     @Test
     fun testFindBySite() {
-        val pageConfig = PageConfig(10, 10)
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.findPageBySiteContaining(anyString(), any())).thenReturn(expected)
-        val result = service.findBySite("some site", pageConfig)
+        val result = service.findBySite("some site", request)
         assertSame(expected, result)
         verify(repo).findPageBySiteContaining(anyString(), any())
     }

@@ -1,9 +1,8 @@
 package executor.service.processing.scenario
 
-import executor.service.model.Scenario
-import executor.service.processing.model.PageConfig
 import executor.service.dao.repository.ScenarioRepository
-
+import executor.service.model.Scenario
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,10 +13,10 @@ class ScenarioProcessingServiceImpl(private val repo: ScenarioRepository) : Scen
 
     override fun delete(scenario: Scenario) { repo.delete(scenario) }
 
-    override fun findAll(pageConfig: PageConfig) = repo.findAll(pageConfig.request())
+    override fun findAll(request: PageRequest) = repo.findAll(request)
 
-    override fun findByName(name: String, pageConfig: PageConfig) =
-        repo.findPageByNameContaining(name, pageConfig.request())
+    override fun findByName(name: String, request: PageRequest) =
+        repo.findPageByNameContaining(name, request)
 
-    override fun findBySite(site: String, pageConfig: PageConfig) = repo.findPageBySiteContaining(site, pageConfig.request())
+    override fun findBySite(site: String, request: PageRequest) = repo.findPageBySiteContaining(site, request)
 }
