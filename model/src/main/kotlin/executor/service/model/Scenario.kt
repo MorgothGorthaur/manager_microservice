@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id
 data class Scenario(
     @Searchable @field:NotEmpty val name: String,
     @Searchable @field:NotEmpty val site: String,
-    val steps: List<Step>?,
+    val steps: List<Step> = listOf(),
 ) {
     @Indexed
     @Id
