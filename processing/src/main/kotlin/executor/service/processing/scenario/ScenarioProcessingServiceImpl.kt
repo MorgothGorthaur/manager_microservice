@@ -16,7 +16,7 @@ class ScenarioProcessingServiceImpl(private val repo: ScenarioRepository) : Scen
     override fun findAll(request: PageRequest) = repo.findAll(request)
 
     override fun findByName(name: String, request: PageRequest) =
-        repo.findPageByNameContaining(name, request)
+        repo.searchByName(name, request)
 
-    override fun findBySite(site: String, request: PageRequest) = repo.findPageBySiteContaining(site, request)
+    override fun findBySite(site: String, request: PageRequest) = repo.searchBySite(site, request)
 }
