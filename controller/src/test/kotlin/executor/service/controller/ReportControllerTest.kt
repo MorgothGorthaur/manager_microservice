@@ -19,54 +19,54 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 private const val BASE_URL = "/manager/reports"
 private const val SCENARIO_ID = "some id"
+private const val SCENARIO_NAME = "some name"
+private const val SCENARIO_SITE = "some site"
 
 @SpringBootTest
 @ExtendWith(SpringExtension::class)
 @AutoConfigureMockMvc
-internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc)  {
+internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
 
-    @MockBean private lateinit var service: ReportProcessingService
+    @MockBean
+    private lateinit var service: ReportProcessingService
 
     @Test
     fun testFindByScenarioId() {
-        val pageNum = 10
-        val pageSize = 10
         whenever(service.findByScenarioId(eq(SCENARIO_ID), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/$SCENARIO_ID").apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+        val requestBuilder = getRequestBuilder("$BASE_URL/$SCENARIO_ID")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
 
     @Test
-    fun testFindLastByScenarioId() {
-        whenever(service.findByScenarioId(eq(SCENARIO_ID), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/$SCENARIO_ID/last")
+    fun testFindSuccessfulByName() {
+        whenever(service.findSuccessfulByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/successful/name=$SCENARIO_NAME")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
 
     @Test
-    fun testFindSuccessful() {
-        val pageNum = 10
-        val pageSize = 10
-        whenever(service.findSuccessful(eq(SCENARIO_ID), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/$SCENARIO_ID/successful").apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+    fun testFindFailedByName() {
+        whenever(service.findFailedByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/failed/name=$SCENARIO_NAME")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
 
     @Test
-    fun testFindFailed() {
-        val pageNum = 10
-        val pageSize = 10
-        whenever(service.findFailed(eq(SCENARIO_ID), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/$SCENARIO_ID/failed").apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+    fun testFindSuccessfulBySite() {
+        whenever(service.findSuccessfulBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/failed/site=$SCENARIO_SITE")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
+    @Test
+    fun testFindFailedBySite() {
+        whenever(service.findFailedByName(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/failed/site=$SCENARIO_SITE")
+        mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
+    private fun getRequestBuilder(url: String) = MockMvcRequestBuilders.get(url).apply {
+        param("pageNum", "10")
+        param("pageSize", "10")
     }
 }

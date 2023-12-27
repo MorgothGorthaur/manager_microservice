@@ -16,49 +16,65 @@ import java.time.LocalDateTime
 
 private const val SCENARIO_ID = "some id"
 
-internal class ReportProcessingServiceImplTest {
+private const val SCENARIO_NAME = "some name"
 
+private const val SCENARIO_SITE = "some site"
+
+private const val ERROR = "some error"
+
+internal class ReportProcessingServiceImplTest {
     private lateinit var repo: ReportRepository
     private lateinit var service: ReportProcessingService
     private lateinit var request: PageRequest
-
     @BeforeEach
     fun init() {
         repo = mock()
         service = ReportProcessingServiceImpl(repo)
         request = mock()
     }
-
     @Test
     fun testFindByScenarioId() {
-        val expected = listOf(getReport("some error"))
+        val expected = listOf(getReport(ERROR))
         whenever(repo.findPageByScenarioId(anyString(), any())).thenReturn(PageImpl(expected))
         val result = service.findByScenarioId(SCENARIO_ID, request).content
         assertEquals(expected, result)
         verify(repo).findPageByScenarioId(anyString(), any())
     }
-
     @Test
-    fun testFindSuccessful() {
+    fun findSuccessfulByName() {
         val expected = listOf(getReport())
-        whenever(repo.findPageByScenarioIdAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findSuccessful(SCENARIO_ID, request).content
+        whenever(repo.searchByNameAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findSuccessfulByName(SCENARIO_NAME, request).content
         assertEquals(expected, result)
-        verify(repo).findPageByScenarioIdAndErrorMessageIsNull(anyString(), any())
+        verify(repo).searchByNameAndErrorMessageIsNull(anyString(), any())
     }
-
     @Test
-    fun testFindFailed() {
-        val expected = listOf(getReport("some error"))
-        whenever(repo.findPageByScenarioIdAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findFailed(SCENARIO_ID, request).content
+    fun findFailedByName() {
+        val expected = listOf(getReport(ERROR))
+        whenever(repo.searchByNameAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findFailedByName(SCENARIO_NAME, request).content
         assertEquals(expected, result)
-        verify(repo).findPageByScenarioIdAndErrorMessageIsNotNull(anyString(), any())
+        verify(repo).searchByNameAndErrorMessageIsNotNull(anyString(), any())
     }
-
+    @Test
+    fun findSuccessfulBySite() {
+        val expected = listOf(getReport())
+        whenever(repo.searchBySiteAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findSuccessfulBySite(SCENARIO_SITE, request).content
+        assertEquals(expected, result)
+        verify(repo).searchBySiteAndErrorMessageIsNull(anyString(), any())
+    }
+    @Test
+    fun findFailedBySite() {
+        val expected = listOf(getReport(ERROR))
+        whenever(repo.searchBySiteAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findFailedBySite(SCENARIO_SITE, request).content
+        assertEquals(expected, result)
+        verify(repo).searchBySiteAndErrorMessageIsNotNull(anyString(), any())
+    }
     private fun getReport(errorMessage: String? = null) = ScenarioReport(
-        name = "some name",
-        site = "some site",
+        name = SCENARIO_NAME,
+        site = SCENARIO_SITE,
         scenarioId = SCENARIO_ID,
         startTime = LocalDateTime.now(),
         endTime = LocalDateTime.now(),
