@@ -8,20 +8,19 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/manager/reports")
 @CrossOrigin("*")
 class ReportController(private val service: ReportProcessingService) {
-
     @GetMapping("/{id}")
     fun findByScenarioId(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable id: String) =
         service.findByScenarioId(id, PageRequest.of(pageNum, pageSize))
-
-    @GetMapping("/{id}/last")
-    fun findLastByScenarioId(@PathVariable id: String) =
-        service.findByScenarioId(id, PageRequest.of(0, 10)).content.toList()
-
-    @GetMapping("/{id}/successful")
-    fun findSuccessful(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable id: String) =
-        service.findSuccessful(id, PageRequest.of(pageNum, pageSize))
-
-    @GetMapping("/{id}/failed")
-    fun findFailed(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable id: String) =
-        service.findFailed(id, PageRequest.of(pageNum, pageSize))
+    @GetMapping("/successful/name={name}")
+    fun findSuccessfulByName(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable name:String) =
+        service.findSuccessfulByName(name, PageRequest.of(pageNum, pageSize))
+    @GetMapping("/successful/site={site}")
+    fun findSuccessfulBySite(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable site:String) =
+        service.findSuccessfulBySite(site, PageRequest.of(pageNum, pageSize))
+    @GetMapping("/failed/name={name}")
+    fun findFailedByName(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable name:String) =
+        service.findFailedByName(name, PageRequest.of(pageNum, pageSize))
+    @GetMapping("/failed/site={site}")
+    fun findFailedBySite(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable site:String) =
+        service.findFailedBySite(site, PageRequest.of(pageNum, pageSize))
 }
