@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.PagingAndSortingRepository
 
 interface ScenarioRepository : RedisDocumentRepository<Scenario, String>, PagingAndSortingRepository<Scenario, String> {
-    fun findPageByNameContaining(name: String, pageable: Pageable): Page<Scenario>
-    fun findPageBySiteContaining(site: String, pageable: Pageable): Page<Scenario>
+    fun searchByName(name: String, pageable: Pageable): Page<Scenario>
+    fun searchBySite(site: String, pageable: Pageable): Page<Scenario>
 }

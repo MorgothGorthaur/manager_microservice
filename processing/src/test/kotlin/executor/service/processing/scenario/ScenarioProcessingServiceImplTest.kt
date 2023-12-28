@@ -62,19 +62,19 @@ internal class ScenarioProcessingServiceImplTest {
     @Test
     fun testFindByName() {
         val expected = PageImpl(listOf<Scenario>())
-        whenever(repo.findPageByNameContaining(anyString(), any())).thenReturn(expected)
+        whenever(repo.searchByName(anyString(), any())).thenReturn(expected)
         val result = service.findByName("some name", request)
         assertSame(expected, result)
-        verify(repo).findPageByNameContaining(anyString(), any())
+        verify(repo).searchByName(anyString(), any())
     }
 
     @Test
     fun testFindBySite() {
         val expected = PageImpl(listOf<Scenario>())
-        whenever(repo.findPageBySiteContaining(anyString(), any())).thenReturn(expected)
+        whenever(repo.searchBySite(anyString(), any())).thenReturn(expected)
         val result = service.findBySite("some site", request)
         assertSame(expected, result)
-        verify(repo).findPageBySiteContaining(anyString(), any())
+        verify(repo).searchBySite(anyString(), any())
     }
 
     private fun getScenario() = Scenario(
