@@ -6,8 +6,6 @@ import org.springframework.data.domain.Pageable
 
 interface ReportProcessingService {
     fun findByScenarioId(scenarioId: String, request: Pageable): Page<ScenarioReport>
-    fun findSuccessfulByName(name: String, request: Pageable): Page<ScenarioReport>
-    fun findFailedByName(name: String, request: Pageable): Page<ScenarioReport>
-    fun findSuccessfulBySite(site: String, request: Pageable): Page<ScenarioReport>
-    fun findFailedBySite(site: String, request: Pageable): Page<ScenarioReport>
+    fun findByName(name: String, request: Pageable): Page<ScenarioReport>
+    fun findBySite(site: String, request: Pageable): Page<ScenarioReport>
 }

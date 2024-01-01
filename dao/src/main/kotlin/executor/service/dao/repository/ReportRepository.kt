@@ -8,9 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository
 
 interface ReportRepository : RedisDocumentRepository<ScenarioReport, String>, PagingAndSortingRepository<ScenarioReport, String> {
     fun findPageByScenarioId(id: String, pageable: Pageable): Page<ScenarioReport>
-    fun searchByNameAndErrorMessageIsNull(name: String, pageable: Pageable): Page<ScenarioReport>
-    fun searchByNameAndErrorMessageIsNotNull(name: String, pageable: Pageable): Page<ScenarioReport>
-    fun searchBySiteAndErrorMessageIsNull(name: String, pageable: Pageable): Page<ScenarioReport>
-    fun searchBySiteAndErrorMessageIsNotNull(name: String, pageable: Pageable): Page<ScenarioReport>
+    fun searchByName(name: String, pageable: Pageable): Page<ScenarioReport>
+    fun searchBySite(site: String, pageable: Pageable): Page<ScenarioReport>
 
 }
