@@ -13,7 +13,7 @@ data class ScenarioReport(
     val name: String,
     @Searchable
     val site: String,
-    val stepReports: List<StepReport>,
+    val stepReports: List<StepReport> = listOf(),
     @Indexed val scenarioId: String,
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
