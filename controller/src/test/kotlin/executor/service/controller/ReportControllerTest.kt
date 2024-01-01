@@ -48,7 +48,12 @@ internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
         val requestBuilder = getRequestBuilder("$BASE_URL/site=$SCENARIO_SITE")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
-
+    @Test
+    fun testFindAll() {
+        whenever(service.findAll(any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder(BASE_URL)
+        mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
+    }
     private fun getRequestBuilder(url: String) = MockMvcRequestBuilders.get(url).apply {
         param("pageNum", "10")
         param("pageSize", "10")
