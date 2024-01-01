@@ -43,7 +43,7 @@ internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
     @Test
-    fun testFindFailedBySite() {
+    fun testFindBySite() {
         whenever(service.findBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = getRequestBuilder("$BASE_URL/site=$SCENARIO_SITE")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
