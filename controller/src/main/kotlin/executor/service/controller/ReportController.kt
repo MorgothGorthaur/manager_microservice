@@ -17,4 +17,6 @@ class ReportController(private val service: ReportProcessingService) {
     @GetMapping("/site={site}")
     fun findBySite(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable site: String) =
         service.findByName(site, PageRequest.of(pageNum, pageSize))
+    @GetMapping
+    fun findAll(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10) = service.findAll(PageRequest.of(pageNum, pageSize))
 }

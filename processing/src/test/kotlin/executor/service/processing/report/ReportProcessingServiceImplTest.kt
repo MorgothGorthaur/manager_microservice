@@ -12,6 +12,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import java.time.LocalDateTime
 
 private const val SCENARIO_ID = "some id"
@@ -41,7 +42,7 @@ internal class ReportProcessingServiceImplTest {
         verify(repo).findPageByScenarioId(anyString(), any())
     }
     @Test
-    fun findByName() {
+    fun testFindByName() {
         val expected = listOf(getReport())
         whenever(repo.searchByName(anyString(), any())).thenReturn(PageImpl(expected))
         val result = service.findByName(SCENARIO_NAME, request).content
@@ -49,13 +50,23 @@ internal class ReportProcessingServiceImplTest {
         verify(repo).searchByName(anyString(), any())
     }
     @Test
-    fun findBySite() {
+    fun testFindBySite() {
         val expected = listOf(getReport())
         whenever(repo.searchBySite(anyString(), any())).thenReturn(PageImpl(expected))
         val result = service.findBySite(SCENARIO_SITE, request).content
         assertEquals(expected, result)
         verify(repo).searchBySite(anyString(), any())
     }
+
+    @Test
+    fun testFindAll() {
+        val expected = listOf(getReport())
+        whenever(repo.findAll(any<Pageable>())).thenReturn(PageImpl(expected))
+        val result = service.findAll(request).content
+        assertEquals(expected, result)
+        verify(repo).findAll(any<Pageable>())
+    }
+
     private fun getReport(errorMessage: String? = null) = ScenarioReport(
         name = SCENARIO_NAME,
         site = SCENARIO_SITE,
