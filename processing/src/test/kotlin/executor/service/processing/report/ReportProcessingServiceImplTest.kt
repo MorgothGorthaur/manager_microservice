@@ -41,36 +41,20 @@ internal class ReportProcessingServiceImplTest {
         verify(repo).findPageByScenarioId(anyString(), any())
     }
     @Test
-    fun findSuccessfulByName() {
+    fun findByName() {
         val expected = listOf(getReport())
-        whenever(repo.searchByNameAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findSuccessfulByName(SCENARIO_NAME, request).content
+        whenever(repo.searchByName(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findByName(SCENARIO_NAME, request).content
         assertEquals(expected, result)
-        verify(repo).searchByNameAndErrorMessageIsNull(anyString(), any())
+        verify(repo).searchByName(anyString(), any())
     }
     @Test
-    fun findFailedByName() {
-        val expected = listOf(getReport(ERROR))
-        whenever(repo.searchByNameAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findFailedByName(SCENARIO_NAME, request).content
-        assertEquals(expected, result)
-        verify(repo).searchByNameAndErrorMessageIsNotNull(anyString(), any())
-    }
-    @Test
-    fun findSuccessfulBySite() {
+    fun findBySite() {
         val expected = listOf(getReport())
-        whenever(repo.searchBySiteAndErrorMessageIsNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findSuccessfulBySite(SCENARIO_SITE, request).content
+        whenever(repo.searchBySite(anyString(), any())).thenReturn(PageImpl(expected))
+        val result = service.findBySite(SCENARIO_SITE, request).content
         assertEquals(expected, result)
-        verify(repo).searchBySiteAndErrorMessageIsNull(anyString(), any())
-    }
-    @Test
-    fun findFailedBySite() {
-        val expected = listOf(getReport(ERROR))
-        whenever(repo.searchBySiteAndErrorMessageIsNotNull(anyString(), any())).thenReturn(PageImpl(expected))
-        val result = service.findFailedBySite(SCENARIO_SITE, request).content
-        assertEquals(expected, result)
-        verify(repo).searchBySiteAndErrorMessageIsNotNull(anyString(), any())
+        verify(repo).searchBySite(anyString(), any())
     }
     private fun getReport(errorMessage: String? = null) = ScenarioReport(
         name = SCENARIO_NAME,

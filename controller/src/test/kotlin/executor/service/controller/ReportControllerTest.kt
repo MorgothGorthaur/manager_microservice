@@ -36,32 +36,16 @@ internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
         val requestBuilder = getRequestBuilder("$BASE_URL/$SCENARIO_ID")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
-
     @Test
-    fun testFindSuccessfulByName() {
-        whenever(service.findSuccessfulByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/successful/name=$SCENARIO_NAME")
+    fun testFindByName() {
+        whenever(service.findByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/name=$SCENARIO_NAME")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
-
-    @Test
-    fun testFindFailedByName() {
-        whenever(service.findFailedByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/failed/name=$SCENARIO_NAME")
-        mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
-    }
-
-    @Test
-    fun testFindSuccessfulBySite() {
-        whenever(service.findSuccessfulBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/failed/site=$SCENARIO_SITE")
-        mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
-    }
-
     @Test
     fun testFindFailedBySite() {
-        whenever(service.findFailedByName(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/failed/site=$SCENARIO_SITE")
+        whenever(service.findBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = getRequestBuilder("$BASE_URL/site=$SCENARIO_SITE")
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
 
