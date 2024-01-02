@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*
 class ScenarioController(private val service: ScenarioProcessingService) {
 
     @GetMapping
-    fun findAll(@RequestParam pageNum: Int, @RequestParam pageSize: Int) = service.findAll(PageRequest.of(pageNum, pageSize))
+    fun findAll(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10) = service.findAll(PageRequest.of(pageNum, pageSize))
 
     @GetMapping("/name={name}")
-    fun findByName(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable name: String) =
+    fun findByName(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable name: String) =
         service.findByName(name, PageRequest.of(pageNum, pageSize))
 
     @GetMapping("/site={site}")
-    fun findBySite(@RequestParam pageNum: Int, @RequestParam pageSize: Int, @PathVariable site: String) =
+    fun findBySite(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable site: String) =
         service.findBySite(site, PageRequest.of(pageNum, pageSize))
 
     @PostMapping
