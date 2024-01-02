@@ -21,51 +21,38 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 private const val BASE_URL = "/manager/scenarios"
-
+private const val SCENARIO_NAME = "some name"
+private const val SCENARIO_SITE = "some site"
 @SpringBootTest
 @ExtendWith(SpringExtension::class)
 @AutoConfigureMockMvc
 internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
 
-    @MockBean private lateinit var service: ScenarioProcessingService
+    @MockBean
+    private lateinit var service: ScenarioProcessingService
 
     private val mapper = jacksonObjectMapper().apply { registerModule(JavaTimeModule()) }
 
     @Test
     fun testFindAll() {
-        val pageNum = 10
-        val pageSize = 10
         whenever(service.findAll(any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = get(BASE_URL).apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+        val requestBuilder = get(BASE_URL)
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
 
     @Test
     fun testFindByName() {
-        val name = "some name"
-        val pageNum = 10
-        val pageSize = 10
-        whenever(service.findByName(eq(name), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = get("$BASE_URL/name=$name").apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+        whenever(service.findByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = get("$BASE_URL/name")
+            .apply { param("name", SCENARIO_NAME) }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
 
     @Test
     fun testFindBySite() {
-        val site = "some site"
-        val pageNum = 10
-        val pageSize = 10
-        whenever(service.findBySite(eq(site), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = get("$BASE_URL/site=$site").apply {
-            param("pageNum", pageNum.toString())
-            param("pageSize", pageSize.toString())
-        }
+        whenever(service.findBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
+        val requestBuilder = get("$BASE_URL/site")
+            .apply { param("site", SCENARIO_SITE) }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
 
