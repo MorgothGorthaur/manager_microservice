@@ -18,5 +18,5 @@ class ReportProcessingServiceImpl(
         processor.createPattern(name).run { repo.searchByName(this, request) }
 
     override fun findBySite(site: String, request: Pageable) =
-        processor.createPattern(site).run { repo.searchBySite(site, request) }
+        processor.createPattern(site).run { repo.searchBySite(this, request) }
 }
