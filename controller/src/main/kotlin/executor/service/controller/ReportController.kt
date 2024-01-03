@@ -8,15 +8,30 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/manager/reports")
 @CrossOrigin("*")
 class ReportController(private val service: ReportProcessingService) {
-    @GetMapping("/{id}")
-    fun findByScenarioId(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable id: String) =
-        service.findByScenarioId(id, PageRequest.of(pageNum, pageSize))
-    @GetMapping("/name={name}")
-    fun findByName(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable name: String) =
-        service.findByName(name, PageRequest.of(pageNum, pageSize))
-    @GetMapping("/site={site}")
-    fun findBySite(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10, @PathVariable site: String) =
-        service.findBySite(site, PageRequest.of(pageNum, pageSize))
+    @GetMapping("/id")
+    fun findByScenarioId(
+        @RequestParam(defaultValue = "0") pageNum: Int,
+        @RequestParam(defaultValue = "10") pageSize: Int,
+        @RequestParam id: String
+    ) = service.findByScenarioId(id, PageRequest.of(pageNum, pageSize))
+
+    @GetMapping("/name")
+    fun findByName(
+        @RequestParam(defaultValue = "0") pageNum: Int,
+        @RequestParam(defaultValue = "10") pageSize: Int,
+        @RequestParam name: String
+    ) = service.findByName(name, PageRequest.of(pageNum, pageSize))
+
+    @GetMapping("/site")
+    fun findBySite(
+        @RequestParam(defaultValue = "0") pageNum: Int,
+        @RequestParam(defaultValue = "10") pageSize: Int,
+        @RequestParam site: String
+    ) = service.findBySite(site, PageRequest.of(pageNum, pageSize))
+
     @GetMapping
-    fun findAll(@RequestParam pageNum: Int = 0, @RequestParam pageSize: Int = 10) = service.findAll(PageRequest.of(pageNum, pageSize))
+    fun findAll(
+        @RequestParam(defaultValue = "0") pageNum: Int,
+        @RequestParam(defaultValue = "10") pageSize: Int
+    ) = service.findAll(PageRequest.of(pageNum, pageSize))
 }

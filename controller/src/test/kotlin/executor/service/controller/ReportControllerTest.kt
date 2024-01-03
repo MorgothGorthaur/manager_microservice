@@ -33,29 +33,31 @@ internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
     @Test
     fun testFindByScenarioId() {
         whenever(service.findByScenarioId(eq(SCENARIO_ID), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/$SCENARIO_ID")
+        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/id")
+            .apply { param("id", SCENARIO_ID) }
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
+
     @Test
     fun testFindByName() {
         whenever(service.findByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/name=$SCENARIO_NAME")
+        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/name")
+            .apply { param("name", SCENARIO_NAME) }
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
+
     @Test
     fun testFindBySite() {
         whenever(service.findBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder("$BASE_URL/site=$SCENARIO_SITE")
+        val requestBuilder = MockMvcRequestBuilders.get("$BASE_URL/site")
+            .apply { param("site", SCENARIO_SITE) }
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
     }
+
     @Test
     fun testFindAll() {
         whenever(service.findAll(any())).thenReturn(PageImpl(listOf()))
-        val requestBuilder = getRequestBuilder(BASE_URL)
+        val requestBuilder =  MockMvcRequestBuilders.get(BASE_URL)
         mockMvc.perform(requestBuilder).andExpect(MockMvcResultMatchers.status().isOk)
-    }
-    private fun getRequestBuilder(url: String) = MockMvcRequestBuilders.get(url).apply {
-        param("pageNum", "10")
-        param("pageSize", "10")
     }
 }
