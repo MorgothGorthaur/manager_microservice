@@ -4,7 +4,7 @@ interface QueryProcessor {
     /**
      * Generates a RedisSearch-compatible pattern from the given query.
      *
-     * Replaces special characters, such as ":", with "`*`".
+     * Replaces special characters, such as ":", with "`?`".
      * Adds "`*`" to both the beginning and end
      * if they are not already present for better search quality.
      *
