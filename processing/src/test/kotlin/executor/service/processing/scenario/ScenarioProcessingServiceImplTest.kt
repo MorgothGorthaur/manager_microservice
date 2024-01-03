@@ -2,29 +2,33 @@ package executor.service.processing.scenario
 
 import executor.service.dao.repository.ScenarioRepository
 import executor.service.model.Scenario
+import executor.service.processing.query.QueryProcessor
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.kotlin.any
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.*
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
+
+private const val SCENARIO_NAME = "some name"
+
+private const val SCENARIO_SITE = "some site"
 
 internal class ScenarioProcessingServiceImplTest {
 
     private lateinit var repo: ScenarioRepository
     private lateinit var service: ScenarioProcessingService
     private lateinit var request: PageRequest
+    private lateinit var processor: QueryProcessor
 
     @BeforeEach
     fun init() {
         repo = mock()
-        service = ScenarioProcessingServiceImpl(repo)
+        processor = mock()
+        service = ScenarioProcessingServiceImpl(repo, processor)
         request = mock()
     }
 
@@ -63,7 +67,8 @@ internal class ScenarioProcessingServiceImplTest {
     fun testFindByName() {
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.searchByName(anyString(), any())).thenReturn(expected)
-        val result = service.findByName("some name", request)
+        whenever(processor.createPattern(eq(SCENARIO_NAME))).thenReturn(SCENARIO_NAME)
+        val result = service.findByName(SCENARIO_NAME, request)
         assertSame(expected, result)
         verify(repo).searchByName(anyString(), any())
     }
@@ -72,14 +77,15 @@ internal class ScenarioProcessingServiceImplTest {
     fun testFindBySite() {
         val expected = PageImpl(listOf<Scenario>())
         whenever(repo.searchBySite(anyString(), any())).thenReturn(expected)
-        val result = service.findBySite("some site", request)
+        whenever(processor.createPattern(eq(SCENARIO_SITE))).thenReturn(SCENARIO_SITE)
+        val result = service.findBySite(SCENARIO_SITE, request)
         assertSame(expected, result)
         verify(repo).searchBySite(anyString(), any())
     }
 
     private fun getScenario() = Scenario(
-        name = "some scenario",
-        site = "some site",
+        name = SCENARIO_NAME,
+        site = SCENARIO_SITE,
         steps = listOf()
     )
 }

@@ -2,14 +2,12 @@ package executor.service.processing.report
 
 import executor.service.dao.repository.ReportRepository
 import executor.service.model.ScenarioReport
+import executor.service.processing.query.QueryProcessor
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.kotlin.any
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.*
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
@@ -27,10 +25,12 @@ internal class ReportProcessingServiceImplTest {
     private lateinit var repo: ReportRepository
     private lateinit var service: ReportProcessingService
     private lateinit var request: PageRequest
+    private lateinit var processor: QueryProcessor
     @BeforeEach
     fun init() {
         repo = mock()
-        service = ReportProcessingServiceImpl(repo)
+        processor = mock()
+        service = ReportProcessingServiceImpl(repo, processor)
         request = mock()
     }
     @Test
@@ -45,6 +45,7 @@ internal class ReportProcessingServiceImplTest {
     fun testFindByName() {
         val expected = listOf(getReport())
         whenever(repo.searchByName(anyString(), any())).thenReturn(PageImpl(expected))
+        whenever(processor.createPattern(eq(SCENARIO_NAME))).thenReturn(SCENARIO_NAME)
         val result = service.findByName(SCENARIO_NAME, request).content
         assertEquals(expected, result)
         verify(repo).searchByName(anyString(), any())
@@ -53,6 +54,7 @@ internal class ReportProcessingServiceImplTest {
     fun testFindBySite() {
         val expected = listOf(getReport())
         whenever(repo.searchBySite(anyString(), any())).thenReturn(PageImpl(expected))
+        whenever(processor.createPattern(eq(SCENARIO_SITE))).thenReturn(SCENARIO_SITE)
         val result = service.findBySite(SCENARIO_SITE, request).content
         assertEquals(expected, result)
         verify(repo).searchBySite(anyString(), any())
