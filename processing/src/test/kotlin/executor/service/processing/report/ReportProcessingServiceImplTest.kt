@@ -36,10 +36,10 @@ internal class ReportProcessingServiceImplTest {
     @Test
     fun testFindByScenarioId() {
         val expected = listOf(getReport(ERROR))
-        whenever(repo.findPageByScenarioId(anyString(), any())).thenReturn(PageImpl(expected))
+        whenever(repo.findByScenarioId(anyString(), any())).thenReturn(PageImpl(expected))
         val result = service.findByScenarioId(SCENARIO_ID, request).content
         assertEquals(expected, result)
-        verify(repo).findPageByScenarioId(anyString(), any())
+        verify(repo).findByScenarioId(anyString(), any())
     }
     @Test
     fun testFindByName() {
