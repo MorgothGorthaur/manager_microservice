@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.*
 import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.Pageable
 import java.time.LocalDateTime
 
 private const val SCENARIO_ID = "some id"
