@@ -36,7 +36,7 @@ internal class PaginatorImplTest {
     }
 
     @Test
-    fun testPaginate_returnEmpty() {
+    fun testPaginate_shouldReturnEmptyPage() {
         val pageNum = 4
         val pageSize = 3
         val data = listOf(1, 2, 3, 4, 5)
