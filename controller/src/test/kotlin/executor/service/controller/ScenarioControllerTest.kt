@@ -35,14 +35,14 @@ internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @Test
     fun testFindAll() {
-        whenever(service.findAll(any())).thenReturn(PageImpl(listOf()))
+        whenever(service.findAll(any(), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get(BASE_URL)
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
     }
 
     @Test
     fun testFindByName() {
-        whenever(service.findByName(eq(SCENARIO_NAME), any())).thenReturn(PageImpl(listOf()))
+        whenever(service.findByName(eq(SCENARIO_NAME), any(), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get("$BASE_URL/name")
             .apply { param("name", SCENARIO_NAME) }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
@@ -50,7 +50,7 @@ internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @Test
     fun testFindBySite() {
-        whenever(service.findBySite(eq(SCENARIO_SITE), any())).thenReturn(PageImpl(listOf()))
+        whenever(service.findBySite(eq(SCENARIO_SITE), any(), any())).thenReturn(PageImpl(listOf()))
         val requestBuilder = get("$BASE_URL/site")
             .apply { param("site", SCENARIO_SITE) }
         mockMvc.perform(requestBuilder).andExpect(status().isOk)
