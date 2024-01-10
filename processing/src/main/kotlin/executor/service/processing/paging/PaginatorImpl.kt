@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component
 @Component
 class PaginatorImpl : Paginator {
     override fun <T> paginate(list: List<T>, pageNum: Int, pageSize: Int): Page<T> {
-        val first = pageNum * pageSize
-        val last = (pageNum + 1) * pageSize
+        val first = (pageNum * pageSize).takeIf { it <= list.size } ?: list.size
+        val last = ((pageNum + 1) * pageSize).takeIf { it <= list.size } ?: list.size
         val pageContent = list.subList(first, last)
         return PageImpl(pageContent, PageRequest.of(pageNum, pageSize), list.size.toLong())
     }
