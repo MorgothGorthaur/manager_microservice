@@ -3,7 +3,6 @@ package executor.service.controller
 import executor.service.model.Scenario
 import executor.service.processing.scenario.ScenarioProcessingService
 import jakarta.validation.Valid
-import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -15,21 +14,21 @@ class ScenarioController(private val service: ScenarioProcessingService) {
     fun findAll(
         @RequestParam(defaultValue = "0") pageNum: Int,
         @RequestParam(defaultValue = "10") pageSize: Int
-    ) = service.findAll(PageRequest.of(pageNum, pageSize))
+    ) = service.findAll(pageNum, pageSize)
 
     @GetMapping("/name")
     fun findByName(
         @RequestParam(defaultValue = "0") pageNum: Int,
         @RequestParam(defaultValue = "10") pageSize: Int,
         @RequestParam name: String
-    ) = service.findByName(name, PageRequest.of(pageNum, pageSize))
+    ) = service.findByName(name, pageNum, pageSize)
 
     @GetMapping("/site")
     fun findBySite(
         @RequestParam(defaultValue = "0") pageNum: Int,
         @RequestParam(defaultValue = "10") pageSize: Int,
         @RequestParam site: String
-    ) = service.findBySite(site, PageRequest.of(pageNum, pageSize))
+    ) = service.findBySite(site, pageNum, pageSize)
 
     @PostMapping
     fun add(@Valid @RequestBody scenario: Scenario) { service.add(scenario) }
