@@ -9,12 +9,12 @@ import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
-class ScenarioProcessingServiceImpl(
+class ScenarioServiceImpl(
     private val scenarioRepository: ScenarioRepository,
     private val reportRepository: ReportRepository,
     private val processor: QueryProcessor,
     private val paginator: Paginator
-) : ScenarioProcessingService {
+) : ScenarioService {
     override fun add(scenario: Scenario) {
         scenarioRepository.save(scenario)
     }

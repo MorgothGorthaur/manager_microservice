@@ -1,6 +1,6 @@
 package executor.service.processing.report
 
-import executor.service.dao.queue.listener.repot.ReportQueueListener
+import executor.service.dao.queue.consumer.repot.ReportConsumer
 import executor.service.dao.repository.ReportRepository
 import executor.service.model.ScenarioReport
 import org.junit.jupiter.api.BeforeEach
@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
 
-internal class QueueProcessingFacadeImplTest {
+internal class ReportListenerImplTest {
 
     private lateinit var repo: ReportRepository
-    private lateinit var listener: ReportQueueListener
-    private lateinit var facade: QueueProcessingFacade
+    private lateinit var listener: ReportConsumer
+    private lateinit var facade: ReportListener
 
     @BeforeEach
     fun init() {
         repo = mock()
         listener = mock()
-        facade = QueueProcessingFacadeImpl(listener, repo)
+        facade = ReportListenerImpl(listener, repo)
     }
 
     @Test

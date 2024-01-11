@@ -1,5 +1,5 @@
 package executor.service.processing.report
 
-interface QueueProcessingFacade {
+interface ReportListener {
     fun execute()
 }

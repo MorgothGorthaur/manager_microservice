@@ -23,11 +23,11 @@ private const val PAGE_SIZE = 10
 
 private const val SCENARIO_ID = "someId"
 
-internal class ScenarioProcessingServiceImplTest {
+internal class ScenarioServiceImplTest {
 
     private lateinit var scenarioRepository: ScenarioRepository
     private lateinit var reportRepository: ReportRepository
-    private lateinit var service: ScenarioProcessingService
+    private lateinit var service: ScenarioService
     private lateinit var processor: QueryProcessor
     private lateinit var paginator: Paginator
 
@@ -37,7 +37,7 @@ internal class ScenarioProcessingServiceImplTest {
         reportRepository = mock()
         processor = mock()
         paginator = mock()
-        service = ScenarioProcessingServiceImpl(scenarioRepository, reportRepository, processor, paginator)
+        service = ScenarioServiceImpl(scenarioRepository, reportRepository, processor, paginator)
     }
 
 

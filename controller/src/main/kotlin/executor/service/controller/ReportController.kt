@@ -1,12 +1,12 @@
 package executor.service.controller
 
-import executor.service.processing.report.ReportProcessingService
+import executor.service.processing.report.ReportService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/manager/reports")
 @CrossOrigin("*")
-class ReportController(private val service: ReportProcessingService) {
+class ReportController(private val service: ReportService) {
     @GetMapping("/id")
     fun findByScenarioId(
         @RequestParam(defaultValue = "0") pageNum: Int,

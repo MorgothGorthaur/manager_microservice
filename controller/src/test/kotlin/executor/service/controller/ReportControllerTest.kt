@@ -1,6 +1,6 @@
 package executor.service.controller
 
-import executor.service.processing.report.ReportProcessingService
+import executor.service.processing.report.ReportService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -28,7 +28,7 @@ private const val SCENARIO_SITE = "some site"
 internal class ReportControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @MockBean
-    private lateinit var service: ReportProcessingService
+    private lateinit var service: ReportService
 
     @Test
     fun testFindByScenarioId() {

@@ -3,7 +3,7 @@ package executor.service.processing.scenario
 import executor.service.model.Scenario
 import org.springframework.data.domain.Page
 
-interface ScenarioProcessingService {
+interface ScenarioService {
     fun add(scenario: Scenario)
 
     fun update(scenario: Scenario)

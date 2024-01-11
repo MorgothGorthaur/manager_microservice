@@ -1,4 +1,4 @@
-package executor.service.dao.queue.listener.repot
+package executor.service.dao.queue.consumer.repot
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -17,18 +17,18 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-internal class ReportQueueListenerImplTest {
+internal class ReportConsumerImplTest {
 
     private val mapper: ObjectMapper = jacksonObjectMapper().apply { registerModule(JavaTimeModule()) }
     private lateinit var template: StringRedisTemplate
     private lateinit var operations: ListOperations<String, String>
-    private lateinit var listener: ReportQueueListener
+    private lateinit var listener: ReportConsumer
 
     @BeforeEach
     fun init() {
         template = mock()
         operations = mock()
-        listener = ReportQueueListenerImpl(template, mapper)
+        listener = ReportConsumerImpl(template, mapper)
     }
     @Test
     fun poll() {

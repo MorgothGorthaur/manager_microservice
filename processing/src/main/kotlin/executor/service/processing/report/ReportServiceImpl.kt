@@ -8,11 +8,11 @@ import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
-class ReportProcessingServiceImpl(
+class ReportServiceImpl(
     private val repo: ReportRepository,
     private val processor: QueryProcessor,
     private val paginator: Paginator
-) : ReportProcessingService {
+) : ReportService {
     override fun findAll(pageNum: Int, pageSize: Int): Page<ScenarioReport> {
         val data = repo.findAll().sortedByDescending { it.startTime }
         return paginator.paginate(data, pageNum, pageSize)
