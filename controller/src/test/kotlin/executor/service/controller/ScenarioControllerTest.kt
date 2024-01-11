@@ -3,7 +3,7 @@ package executor.service.controller
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import executor.service.model.Scenario
-import executor.service.processing.scenario.ScenarioProcessingService
+import executor.service.processing.scenario.ScenarioService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.kotlin.any
@@ -29,7 +29,7 @@ private const val SCENARIO_SITE = "some site"
 internal class ScenarioControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @MockBean
-    private lateinit var service: ScenarioProcessingService
+    private lateinit var service: ScenarioService
 
     private val mapper = jacksonObjectMapper().apply { registerModule(JavaTimeModule()) }
 

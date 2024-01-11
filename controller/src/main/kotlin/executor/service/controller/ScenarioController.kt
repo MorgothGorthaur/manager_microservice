@@ -1,14 +1,14 @@
 package executor.service.controller
 
 import executor.service.model.Scenario
-import executor.service.processing.scenario.ScenarioProcessingService
+import executor.service.processing.scenario.ScenarioService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/manager/scenarios")
 @CrossOrigin("*")
-class ScenarioController(private val service: ScenarioProcessingService) {
+class ScenarioController(private val service: ScenarioService) {
 
     @GetMapping
     fun findAll(

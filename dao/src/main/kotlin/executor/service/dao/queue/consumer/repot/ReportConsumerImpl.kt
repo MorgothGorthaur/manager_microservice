@@ -1,4 +1,4 @@
-package executor.service.dao.queue.listener.repot
+package executor.service.dao.queue.consumer.repot
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -7,10 +7,10 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Component
 
 @Component
-class ReportQueueListenerImpl(
+class ReportConsumerImpl(
     private val template: StringRedisTemplate,
     private val mapper: ObjectMapper
-) : ReportQueueListener {
+) : ReportConsumer {
     private val key = "report.queue.key"
     override fun poll() = template.opsForList().rightPop(key)
         ?.let{ mapper.readValue<ScenarioReport>(it) }

@@ -18,9 +18,9 @@ private const val SCENARIO_SITE = "some site"
 private const val ERROR = "some error"
 private const val PAGE_NUM = 0
 private const val PAGE_SIZE = 10
-internal class ReportProcessingServiceImplTest {
+internal class ReportServiceImplTest {
     private lateinit var repo: ReportRepository
-    private lateinit var service: ReportProcessingService
+    private lateinit var service: ReportService
     private lateinit var processor: QueryProcessor
     private lateinit var paginator: Paginator
     @BeforeEach
@@ -28,7 +28,7 @@ internal class ReportProcessingServiceImplTest {
         repo = mock()
         processor = mock()
         paginator = mock()
-        service = ReportProcessingServiceImpl(repo, processor, paginator)
+        service = ReportServiceImpl(repo, processor, paginator)
     }
     @Test
     fun testFindByScenarioId() {

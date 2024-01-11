@@ -1,4 +1,4 @@
-package executor.service.dao.queue.listener
+package executor.service.dao.queue.consumer
 
 interface QueueListener<T> {
     fun poll(): T?
