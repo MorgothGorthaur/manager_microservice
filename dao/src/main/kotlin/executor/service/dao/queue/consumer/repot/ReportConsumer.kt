@@ -1,7 +1,7 @@
 package executor.service.dao.queue.consumer.repot
 
 import executor.service.model.ScenarioReport
-import executor.service.dao.queue.consumer.QueueListener
+import executor.service.dao.queue.consumer.QueueConsumer
 
-interface ReportConsumer : QueueListener<ScenarioReport> {
+interface ReportConsumer : QueueConsumer<ScenarioReport> {
 }
