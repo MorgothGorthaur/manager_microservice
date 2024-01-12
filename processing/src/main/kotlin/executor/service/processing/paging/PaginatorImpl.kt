@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Component
 
 @Component
-class PaginatorImpl : Paginator {
+internal class PaginatorImpl : Paginator {
     override fun <T> paginate(list: List<T>, pageNum: Int, pageSize: Int): Page<T> {
         val first = (pageNum * pageSize).takeIf { it <= list.size } ?: list.size
         val last = ((pageNum + 1) * pageSize).takeIf { it <= list.size } ?: list.size

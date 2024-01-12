@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
-class ScenarioServiceImpl(
+internal class ScenarioServiceImpl(
     private val scenarioRepository: ScenarioRepository,
     private val reportRepository: ReportRepository,
     private val processor: QueryProcessor,

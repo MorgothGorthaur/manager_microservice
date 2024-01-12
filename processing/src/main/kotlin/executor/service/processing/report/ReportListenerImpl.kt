@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 
-class ReportListenerImpl(
+internal class ReportListenerImpl(
     private val listener: ReportConsumer,
     private val repo: ReportRepository
 ) : ReportListener {

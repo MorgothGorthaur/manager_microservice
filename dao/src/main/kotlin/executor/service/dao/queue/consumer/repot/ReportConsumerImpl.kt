@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Component
 
 @Component
-class ReportConsumerImpl(
+internal class ReportConsumerImpl(
     private val template: StringRedisTemplate,
     private val mapper: ObjectMapper
 ) : ReportConsumer {

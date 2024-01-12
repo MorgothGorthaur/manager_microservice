@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
-class ReportServiceImpl(
+internal class ReportServiceImpl(
     private val repo: ReportRepository,
     private val processor: QueryProcessor,
     private val paginator: Paginator

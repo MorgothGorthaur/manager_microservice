@@ -1,6 +1,6 @@
 package executor.service.processing.query
 
-interface QueryProcessor {
+internal interface QueryProcessor {
     /**
      * Generates a RedisSearch-compatible pattern from the given query.
      *
