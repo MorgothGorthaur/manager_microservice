@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
 
-internal class ReportListenerImplTest {
+internal class ScheduledReportListenerTest {
 
     private lateinit var repo: ReportRepository
     private lateinit var listener: ReportConsumer
@@ -18,7 +18,7 @@ internal class ReportListenerImplTest {
     fun init() {
         repo = mock()
         listener = mock()
-        facade = ReportListenerImpl(listener, repo)
+        facade = ScheduledReportListener(listener, repo)
     }
 
     @Test
