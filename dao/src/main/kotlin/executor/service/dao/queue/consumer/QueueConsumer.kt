@@ -1,5 +1,5 @@
 package executor.service.dao.queue.consumer
 
-interface QueueListener<T> {
+interface QueueConsumer<T> {
     fun poll(): T?
 }

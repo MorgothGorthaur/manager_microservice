@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class MapperConfig {
+internal class MapperConfig {
     @Bean
     fun mapper() = jacksonObjectMapper().apply { registerModule(JavaTimeModule()) }
 }

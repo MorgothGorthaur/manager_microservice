@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
 import org.springframework.data.redis.core.StringRedisTemplate
 
 @Configuration
-class RedisConfig(private val holder: RedisConfigHolder) {
+internal class RedisConfig(private val holder: RedisConfigHolder) {
     @Bean
     fun jedisConnectionFactory(): JedisConnectionFactory {
         val config = RedisStandaloneConfiguration(holder.redisHost, holder.redisPort)
